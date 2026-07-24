@@ -12,6 +12,7 @@ Estabelecer uma base React com TypeScript e Vite, capaz de iniciar localmente e 
 - O Node.js foi atualizado para a versão 24.18.0, compatível com o Vite atual.
 - O gerenciador de pacotes escolhido é o pnpm.
 - Tailwind CSS v4 foi integrado por meio do plugin oficial para Vite.
+- ESLint foi configurado para JavaScript, TypeScript, Hooks e Fast Refresh.
 - O build de produção foi validado com `pnpm build`.
 
 ## Decisão arquitetural: por que Vite e não Next.js?
@@ -98,6 +99,7 @@ O Vite 8 tentou empacotar o plugin Tailwind com Rolldown e falhou ao interpretar
 - pnpm e lockfile `pnpm-lock.yaml`.
 - Tailwind CSS e `@tailwindcss/vite` como dependências de desenvolvimento.
 - Uma tela mínima para validar utilities do Tailwind.
+- ESLint com configuração flat em `eslint.config.js`.
 - Scripts `dev`, `build` e `preview` com carregamento nativo da configuração.
 
 ## Estrutura criada
@@ -108,6 +110,7 @@ src/
   index.css     # Importa Tailwind
   main.tsx      # Ponto de entrada React
 vite.config.ts  # Plugins do React e Tailwind
+eslint.config.js # Regras de análise estática
 docs/           # Capítulos de aprendizado e status da POC
 ```
 
@@ -131,6 +134,7 @@ sequenceDiagram
 - Usar um único gerenciador de pacotes: pnpm.
 - Versionar o lockfile.
 - Executar `pnpm build` antes de considerar uma etapa concluída.
+- Executar `pnpm lint` antes de enviar alterações para revisão.
 - Usar HTML semântico antes de adicionar ARIA.
 - Manter classes Tailwind relacionadas próximas e extrair componentes quando o JSX perder legibilidade.
 
@@ -140,6 +144,7 @@ sequenceDiagram
 - Ignorar avisos de versão incompatível do Node.
 - Remover o lockfile para “resolver” qualquer problema de instalação.
 - Criar configurações Tailwind extensas sem uma necessidade concreta.
+- Usar ESLint e Prettier como se fossem a mesma ferramenta.
 - Usar uma `div` clicável em vez de um elemento semântico, como `button`.
 
 ## Perguntas de entrevista
@@ -163,8 +168,9 @@ sequenceDiagram
 - [x] Node atualizado e compatível com o Vite.
 - [x] pnpm definido como gerenciador de pacotes.
 - [x] Tailwind CSS configurado.
+- [x] ESLint configurado e validado.
 - [x] Build de produção executado com sucesso.
-- [ ] ESLint e Prettier configurados.
+- [ ] Prettier configurado.
 - [ ] Vitest e React Testing Library configurados.
 - [ ] Capítulo revisado e módulo concluído.
 

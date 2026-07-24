@@ -11,7 +11,8 @@ Construir um laboratório pequeno de catálogo de produtos para estudar arquitet
 | React + TypeScript + Vite | Configurado |
 | pnpm | Configurado |
 | Tailwind CSS | Configurado |
-| ESLint + Prettier | Pendente |
+| ESLint | Configurado |
+| Prettier | Pendente |
 | Vitest + React Testing Library | Pendente |
 | React Router | Pendente |
 | TanStack Query | Pendente |
@@ -31,6 +32,7 @@ src/
   index.css
   main.tsx
 vite.config.ts
+eslint.config.js
 ```
 
 ## Módulos concluídos
@@ -39,11 +41,11 @@ Nenhum módulo está concluído integralmente.
 
 ## Módulo em andamento
 
-**Módulo 1 — Fundação.** Vite, TypeScript e Tailwind foram configurados e validados. Ainda faltam ESLint, Prettier, Vitest e React Testing Library.
+**Módulo 1 — Fundação.** Vite, TypeScript, Tailwind e ESLint foram configurados e validados. Ainda faltam Prettier, Vitest e React Testing Library.
 
 ## Próximo passo
 
-Configurar ESLint e Prettier, definindo responsabilidades distintas para análise de código e formatação.
+Configurar Prettier, definindo sua responsabilidade de formatação e sua convivência com o ESLint.
 
 ## Conceitos aprendidos
 
@@ -52,6 +54,7 @@ Configurar ESLint e Prettier, definindo responsabilidades distintas para anális
 - Vite como ferramenta de desenvolvimento e build.
 - Tailwind como CSS gerado em build, sem runtime JavaScript.
 - Lockfile e uso consistente de um único gerenciador de pacotes.
+- ESLint como análise estática, separado da responsabilidade de formatação.
 
 ## Decisões arquiteturais
 
