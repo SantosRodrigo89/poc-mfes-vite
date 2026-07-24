@@ -1,4 +1,6 @@
-function App() {
+import React from 'react'
+
+const ProductsListPage = () => {
   return (
     <main className="grid min-h-screen place-items-center bg-slate-50 p-6 text-slate-950">
       <section className="max-w-lg rounded-xl bg-white p-8 shadow-sm ring-1 ring-slate-200">
@@ -9,4 +11,4 @@ function App() {
   )
 }
 
-export default App
+export default ProductsListPage
