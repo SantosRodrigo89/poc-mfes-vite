@@ -13,6 +13,7 @@ Estabelecer uma base React com TypeScript e Vite, capaz de iniciar localmente e 
 - O gerenciador de pacotes escolhido é o pnpm.
 - Tailwind CSS v4 foi integrado por meio do plugin oficial para Vite.
 - ESLint foi configurado para JavaScript, TypeScript, Hooks e Fast Refresh.
+- Prettier foi instalado com versão exata e integrado ao ESLint.
 - O build de produção foi validado com `pnpm build`.
 
 ## Decisão arquitetural: por que Vite e não Next.js?
@@ -23,10 +24,10 @@ Next.js é uma excelente escolha quando o produto precisa de renderização no s
 
 Com Vite, precisaremos escolher e configurar explicitamente bibliotecas como React Router, TanStack Query e a organização do projeto. Esse esforço é intencional: ele torna visível o papel de cada ferramenta e ajuda a explicar decisões em uma entrevista técnica.
 
-| Escolha | Vantagem | Trade-off |
-| --- | --- | --- |
-| Next.js | Convenções e recursos de servidor integrados | Menos exposição às decisões de uma SPA React; maior superfície de conceitos |
-| React + Vite | Base leve, rápida e explícita para uma SPA | Rotas, dados e outras capacidades precisam ser escolhidas e integradas |
+| Escolha      | Vantagem                                     | Trade-off                                                                   |
+| ------------ | -------------------------------------------- | --------------------------------------------------------------------------- |
+| Next.js      | Convenções e recursos de servidor integrados | Menos exposição às decisões de uma SPA React; maior superfície de conceitos |
+| React + Vite | Base leve, rápida e explícita para uma SPA   | Rotas, dados e outras capacidades precisam ser escolhidas e integradas      |
 
 ## Decisão arquitetural: Vite não substitui React
 
@@ -100,6 +101,7 @@ O Vite 8 tentou empacotar o plugin Tailwind com Rolldown e falhou ao interpretar
 - Tailwind CSS e `@tailwindcss/vite` como dependências de desenvolvimento.
 - Uma tela mínima para validar utilities do Tailwind.
 - ESLint com configuração flat em `eslint.config.js`.
+- Prettier com `.prettierrc.json`, `.prettierignore` e scripts de escrita e verificação.
 - Scripts `dev`, `build` e `preview` com carregamento nativo da configuração.
 
 ## Estrutura criada
@@ -111,6 +113,8 @@ src/
   main.tsx      # Ponto de entrada React
 vite.config.ts  # Plugins do React e Tailwind
 eslint.config.js # Regras de análise estática
+.prettierrc.json # Convenções de formatação
+.prettierignore  # Artefatos que não devem ser formatados
 docs/           # Capítulos de aprendizado e status da POC
 ```
 
@@ -135,6 +139,7 @@ sequenceDiagram
 - Versionar o lockfile.
 - Executar `pnpm build` antes de considerar uma etapa concluída.
 - Executar `pnpm lint` antes de enviar alterações para revisão.
+- Executar `pnpm format:check` no CI; usar `pnpm format` para aplicar a formatação localmente.
 - Usar HTML semântico antes de adicionar ARIA.
 - Manter classes Tailwind relacionadas próximas e extrair componentes quando o JSX perder legibilidade.
 
@@ -161,6 +166,10 @@ sequenceDiagram
    Quando o projeto já possui uma cadeia PostCSS necessária por outros plugins ou uma configuração legada estabelecida.
 6. **Por que manter o lockfile no repositório?**  
    Para que ambientes diferentes instalem versões idênticas das dependências resolvidas.
+7. **Qual a diferença entre ESLint e Prettier?**  
+   ESLint encontra problemas e padrões de código; Prettier aplica uma formatação consistente.
+8. **Por que usar `eslint-config-prettier`?**  
+   Para desligar regras de estilo do ESLint que poderiam disputar a mesma decisão com o Prettier.
 
 ## Checklist
 
@@ -169,8 +178,8 @@ sequenceDiagram
 - [x] pnpm definido como gerenciador de pacotes.
 - [x] Tailwind CSS configurado.
 - [x] ESLint configurado e validado.
+- [x] Prettier configurado e validado.
 - [x] Build de produção executado com sucesso.
-- [ ] Prettier configurado.
 - [ ] Vitest e React Testing Library configurados.
 - [ ] Capítulo revisado e módulo concluído.
 
@@ -181,3 +190,4 @@ sequenceDiagram
 - [Tailwind CSS: Using Vite](https://tailwindcss.com/docs/installation/using-vite)
 - [React: TypeScript](https://react.dev/learn/typescript)
 - [pnpm: Introduction](https://pnpm.io/motivation)
+- [Prettier: Install](https://prettier.io/docs/install)

@@ -6,20 +6,20 @@ Construir um laboratório pequeno de catálogo de produtos para estudar arquitet
 
 ## Stack
 
-| Tecnologia | Estado |
-| --- | --- |
-| React + TypeScript + Vite | Configurado |
-| pnpm | Configurado |
-| Tailwind CSS | Configurado |
-| ESLint | Configurado |
-| Prettier | Pendente |
-| Vitest + React Testing Library | Pendente |
-| React Router | Pendente |
-| TanStack Query | Pendente |
-| React Hook Form + Zod | Pendente |
-| Context API | Pendente |
-| DummyJSON | Pendente |
-| Micro Frontends | Pendente, último módulo |
+| Tecnologia                     | Estado                  |
+| ------------------------------ | ----------------------- |
+| React + TypeScript + Vite      | Configurado             |
+| pnpm                           | Configurado             |
+| Tailwind CSS                   | Configurado             |
+| ESLint                         | Configurado             |
+| Prettier                       | Configurado             |
+| Vitest + React Testing Library | Pendente                |
+| React Router                   | Pendente                |
+| TanStack Query                 | Pendente                |
+| React Hook Form + Zod          | Pendente                |
+| Context API                    | Pendente                |
+| DummyJSON                      | Pendente                |
+| Micro Frontends                | Pendente, último módulo |
 
 ## Estrutura atual
 
@@ -41,11 +41,11 @@ Nenhum módulo está concluído integralmente.
 
 ## Módulo em andamento
 
-**Módulo 1 — Fundação.** Vite, TypeScript, Tailwind e ESLint foram configurados e validados. Ainda faltam Prettier, Vitest e React Testing Library.
+**Módulo 1 — Fundação.** Vite, TypeScript, Tailwind, ESLint e Prettier foram configurados e validados. Ainda faltam Vitest e React Testing Library.
 
 ## Próximo passo
 
-Configurar Prettier, definindo sua responsabilidade de formatação e sua convivência com o ESLint.
+Configurar Vitest e React Testing Library como infraestrutura de testes da POC.
 
 ## Conceitos aprendidos
 
@@ -55,6 +55,7 @@ Configurar Prettier, definindo sua responsabilidade de formatação e sua conviv
 - Tailwind como CSS gerado em build, sem runtime JavaScript.
 - Lockfile e uso consistente de um único gerenciador de pacotes.
 - ESLint como análise estática, separado da responsabilidade de formatação.
+- Prettier como formatação determinística, integrado ao ESLint por `eslint-config-prettier`.
 
 ## Decisões arquiteturais
 
