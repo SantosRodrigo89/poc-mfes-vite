@@ -1,7 +1,12 @@
-import ProductsListPage from "../pages/ProductsListPage";
+import { BrowserRouter } from 'react-router-dom'
+import { ProductsRoutes } from '../routes/ProductsRoutes'
 
 function App() {
-  return <ProductsListPage />;
+  return (
+    <BrowserRouter>
+      <ProductsRoutes />
+    </BrowserRouter>
+  )
 }
 
-export default App;
+export default App

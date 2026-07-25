@@ -1,11 +1,7 @@
-import { Suspense, lazy } from 'react'
+import { AppRoutes } from "../routes/AppRoutes"
 
-const ProductsApp = lazy(() => import('products/App'))
-
-export default function App() {
-  return (
-    <Suspense fallback={<p>Carregando Products...</p>}>
-      <ProductsApp />
-    </Suspense>
-  )
+function App() {
+  return <AppRoutes />
 }
+
+export default App

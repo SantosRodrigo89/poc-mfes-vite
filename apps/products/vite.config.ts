@@ -8,21 +8,16 @@ export default defineConfig({
   server: {
     port: 3001,
   },
-
   plugins: [
     react(),
     tailwindcss(),
     federation({
       name: 'products',
-
       filename: 'remoteEntry.js',
-
       exposes: {
-        './App': './src/app/App.tsx',
+        './ProductsRoutes': './src/routes/ProductsRoutes.tsx',
       },
-
       shared: ['react', 'react-dom', '@tanstack/react-query'],
-
       dts: false,
     }),
   ],
