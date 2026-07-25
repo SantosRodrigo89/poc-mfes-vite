@@ -1,7 +1,7 @@
+import { federation } from '@module-federation/vite'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
-import { federation } from '@module-federation/vite'
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -22,6 +22,8 @@ export default defineConfig({
       },
 
       shared: ['react', 'react-dom', '@tanstack/react-query'],
+
+      dts: false,
     }),
   ],
 })

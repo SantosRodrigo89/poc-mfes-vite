@@ -11,7 +11,11 @@ export default defineConfig({
     federation({
       name: 'host',
       remotes: {
-        products: 'http://localhost:3001/remoteEntry.js',
+        products: {
+          type: 'module',
+          name: 'products',
+          entry: 'http://localhost:4173/remoteEntry.js',
+        },
       },
       shared: ['react', 'react-dom', '@tanstack/react-query'],
     }),

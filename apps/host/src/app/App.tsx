@@ -1,5 +1,11 @@
-import { Router } from './router'
+import { Suspense, lazy } from 'react'
+
+const ProductsApp = lazy(() => import('products/App'))
 
 export default function App() {
-  return <Router />
+  return (
+    <Suspense fallback={<p>Carregando Products...</p>}>
+      <ProductsApp />
+    </Suspense>
+  )
 }
