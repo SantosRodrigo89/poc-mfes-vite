@@ -23,13 +23,10 @@ export function useProducts() {
     loadProducts()
   }, [])
 
-  return data
+  return { data, isLoading, error }
 }
 
 // Se essa fosse uma tarefa de um desenvolvedor júnior no meu time, eu faria exatamente uma pergunta no PR:
-
 // Por que existe um Hook entre a página e o Service?
-
 // Se ele respondesse:
-
 // "Porque o Hook encapsula a lógica de obtenção dos dados e adapta o Service para o React, permitindo trocar a implementação (fetch, React Query, etc.) sem alterar a UI."
