@@ -1,28 +1,15 @@
-import { useEffect, useState } from 'react'
-import type { Product } from '../domain/product/product.schema'
+import { useQuery } from '@tanstack/react-query'
 import { productService } from '../domain/product/product.service'
 
 export function useProducts() {
-  const [data, setData] = useState<Product[]>([])
-  const [isLoading, setIsLoading] = useState(true)
-  const [error, setError] = useState<Error | null>(null)
+  const query = useQuery({
+    queryKey: ['products'], // Identificador único da consulta no cache.
+    queryFn: productService.getProducts, // O React Query executará essa função quando necessário.
+    select: (response) => response.products, // Seleciona apenas os dados da resposta. Só roda quando a query for bem sucedida
+  })
 
-  useEffect(() => {
-    const loadProducts = async () => {
-      try {
-        const response = await productService.getProducts()
-        setData(response.products)
-      } catch (err) {
-        if (err instanceof Error) {
-          setError(err)
-        }
-      } finally {
-        setIsLoading(false)
-      }
-    }
-    loadProducts()
-  }, [])
-
-  return { data, isLoading, error }
+  return query
 }
 
+// Se vários componentes precisarem dos mesmos dados, o React Query vai compartilhar 
+// os dados em cache entre eles, evitando múltiplas requisições para a mesma informação.
