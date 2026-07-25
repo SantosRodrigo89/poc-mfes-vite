@@ -14,7 +14,8 @@ export default defineConfig({
         products: {
           type: 'module',
           name: 'products',
-          entry: 'http://localhost:4173/remoteEntry.js',
+          entry: 'http://localhost:3001/remoteEntry.js',
+          // entry: 'http://localhost:4173/remoteEntry.js',
         },
       },
       shared: ['react', 'react-dom', '@tanstack/react-query'],
