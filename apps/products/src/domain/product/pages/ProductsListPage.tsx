@@ -1,10 +1,10 @@
-import ProductCounter from '../components/ui/ProductCounter'
-import { useCreateProduct } from '../hooks/useCreateProducts';
+import ProductCounter from '../components/ProductCounter';
+// import { useCreateProduct } from '../hooks/useCreateProducts';
 import { useProducts } from '../hooks/useProducts'
 
 const ProductsListPage = () => {
   const { data, isLoading, error } = useProducts()
-  const { mutate } = useCreateProduct();
+  // const { mutate } = useCreateProduct();
 
   if (isLoading) {
     return <p>Carregando produtos...</p>

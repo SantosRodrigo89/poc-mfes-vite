@@ -1,9 +1,5 @@
-import ProductsListPage from "../domain/product/pages/ProductsListPage"
+import { Router } from './router'
 
-function App() {
-  return (
-    <ProductsListPage />
-  )
+export default function App() {
+  return <Router />
 }
-
-export default App

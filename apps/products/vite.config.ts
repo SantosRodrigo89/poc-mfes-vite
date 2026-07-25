@@ -5,14 +5,22 @@ import { federation } from '@module-federation/vite'
 
 // https://vite.dev/config/
 export default defineConfig({
+  server: {
+    port: 3001,
+  },
+
   plugins: [
     react(),
     tailwindcss(),
     federation({
-      name: 'host',
-      remotes: {
-        products: 'http://localhost:3001/remoteEntry.js',
+      name: 'products',
+
+      filename: 'remoteEntry.js',
+
+      exposes: {
+        './App': './src/app/App.tsx',
       },
+
       shared: ['react', 'react-dom', '@tanstack/react-query'],
     }),
   ],

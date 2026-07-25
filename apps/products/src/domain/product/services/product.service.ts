@@ -3,8 +3,11 @@ import {
   createProductSchema,
   type CreateProductDto,
   type CreateProductResponse,
-} from './schemas/create-product.schema'
-import { productsResponseSchema, type ProductsResponse } from './schemas/product.schema'
+} from '../schemas/create-product.schema'
+import {
+  productsResponseSchema,
+  type ProductsResponse,
+} from '../schemas/product.schema'
 
 export const productService = {
   async getProducts(): Promise<ProductsResponse> {
