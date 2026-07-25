@@ -1,9 +1,7 @@
-import ProductsListPage from "../domain/product/pages/ProductsListPage"
+import ProductsListPage from "../pages/ProductsListPage";
 
 function App() {
-  return (
-    <ProductsListPage />
-  )
+  return <ProductsListPage />;
 }
 
-export default App
+export default App;
