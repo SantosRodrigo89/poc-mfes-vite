@@ -1,4 +1,4 @@
-import ProductsListPage from "../pages/ProductsListPage"
+import ProductsListPage from "../domain/product/pages/ProductsListPage"
 
 function App() {
   return (
