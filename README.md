@@ -1,32 +1,48 @@
-# React + TypeScript + Vite
+# POC - Micro Frontends com Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Projeto criado para estudar arquitetura Front-End moderna com foco em:
 
-Currently, two official plugins are available:
+- React
+- React Query
+- Module Federation
+- Micro Frontends
+- Design System
+- Arquitetura Front-End
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Objetivo
 
-## React Compiler
+Simular a migração incremental de uma aplicação React monolítica para uma arquitetura baseada em Micro Frontends utilizando Module Federation.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Estrutura
 
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```text
+apps/
+packages/
+docs/
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+## Aplicações
+
+### Host
+
+Responsável por:
+
+- Orquestração
+- Providers globais
+- Layout
+- Autenticação
+- Carregamento dos Remotes
+
+### Products
+
+Primeiro domínio extraído.
+
+Representa um Remote independente.
+
+## Documentação
+
+Toda documentação encontra-se em:
+
+```text
+docs/
+```
