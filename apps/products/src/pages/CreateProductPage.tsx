@@ -1,3 +1,5 @@
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 
@@ -8,18 +10,122 @@ import {
 } from '../schemas/create-product.schema'
 
 export default function CreateProductPage() {
+  const navigate = useNavigate()
+
+  /**
+   * A Mutation encapsula toda a comunicação com a API.
+   *
+   * A página não conhece:
+   * - fetch
+   * - axios
+   * - productService
+   * - invalidateQueries
+   *
+   * Ela apenas executa uma intenção:
+   * "Criar um produto".
+   */
   const { mutate, isPending } = useCreateProduct()
 
+  /**
+   * Simula um produto retornado pela API.
+   *
+   * Utilizado apenas para demonstrar a diferença entre
+   * defaultValues e reset().
+   *
+   * Em produção esses dados normalmente viriam do React Query.
+   */
+  const fakeProduct: CreateProductDto = {
+    title: 'iPhone 15',
+    price: 5999,
+    description: 'Smartphone Apple',
+  }
+
+  /**
+   * useForm é responsável por gerenciar todo o ciclo de vida do formulário.
+   *
+   * O generic <CreateProductDto> permite que o TypeScript conheça
+   * exatamente quais campos existem.
+   *
+   * Exemplo:
+   *
+   * ✅ register('title')
+   * ❌ register('banana') // Erro de compilação
+   *
+   * O resolver conecta o React Hook Form ao Zod.
+   * Assim reutilizamos o mesmo contrato utilizado pelo domínio,
+   * mantendo uma única fonte da verdade para validação.
+   */
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<CreateProductDto>({
     resolver: zodResolver(createProductSchema),
+
+    /**
+     * Utilize defaultValues quando os dados já existem
+     * ANTES da criação do formulário.
+     *
+     * Exemplos:
+     *
+     * - SSR
+     * - Clonagem de registros
+     * - Wizard
+     * - Navegação utilizando state
+     *
+     * defaultValues: fakeProduct,
+     */
   })
 
+  /**
+   * Simula uma chamada assíncrona da API.
+   *
+   * O formulário já foi criado.
+   *
+   * Como o React Hook Form utiliza defaultValues apenas
+   * durante a inicialização do formulário,
+   * precisamos utilizar reset() para atualizar seus valores.
+   *
+   * Esse é exatamente o fluxo utilizado em telas de edição
+   * quando os dados chegam através do React Query.
+   */
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      reset(fakeProduct)
+    }, 2000)
+
+    return () => clearTimeout(timer)
+  }, [reset])
+
+  /**
+   * handleSubmit executa automaticamente:
+   *
+   * Formulário
+   *      ↓
+   * Validação
+   *      ↓
+   * Zod
+   *      ↓
+   * onSubmit(data)
+   *
+   * O objeto "data" já chega validado e tipado.
+   */
   const onSubmit = (data: CreateProductDto) => {
-    mutate(data)
+    mutate(data, {
+      onSuccess: () => {
+        /**
+         * A Mutation foi concluída com sucesso.
+         *
+         * A invalidação do cache já acontece dentro
+         * do Hook useCreateProduct().
+         *
+         * A responsabilidade da página é apenas decidir
+         * o fluxo da interface.
+         */
+        navigate('/products')
+      },
+    })
   }
 
   return (
@@ -35,6 +141,13 @@ export default function CreateProductPage() {
           </p>
         </header>
 
+        {/**
+         * handleSubmit controla todo o fluxo do formulário.
+         *
+         * Não chamamos o Zod manualmente.
+         * O React Hook Form executa a validação através do Resolver
+         * antes de chamar o onSubmit.
+         */}
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="space-y-6"
@@ -51,6 +164,18 @@ export default function CreateProductPage() {
               id="title"
               type="text"
               placeholder="Ex: Notebook Dell XPS"
+
+              /**
+               * register conecta automaticamente o campo
+               * ao estado interno do React Hook Form.
+               *
+               * Não precisamos controlar:
+               *
+               * - value
+               * - onChange
+               * - onBlur
+               * - useState
+               */
               {...register('title')}
               className="w-full rounded-lg border border-slate-300 px-4 py-2 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
             />
@@ -75,7 +200,23 @@ export default function CreateProductPage() {
               type="number"
               step="0.01"
               placeholder="0,00"
+
               {...register('price', {
+                /**
+                 * Todo input HTML retorna string.
+                 *
+                 * Mesmo utilizando:
+                 *
+                 * <input type="number" />
+                 *
+                 * o navegador retorna:
+                 *
+                 * "5999"
+                 *
+                 * valueAsNumber converte automaticamente
+                 * para number, mantendo compatibilidade
+                 * com o DTO e o schema do Zod.
+                 */
                 valueAsNumber: true,
               })}
               className="w-full rounded-lg border border-slate-300 px-4 py-2 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
@@ -100,6 +241,19 @@ export default function CreateProductPage() {
               id="description"
               rows={4}
               placeholder="Descreva o produto..."
+
+              /**
+               * textarea funciona exatamente da mesma forma
+               * que um input tradicional.
+               *
+               * Enquanto o componente respeitar o contrato
+               * esperado pelo React Hook Form,
+               * basta utilizar register().
+               *
+               * Componentes como React Select,
+               * Material UI Select ou DatePicker
+               * normalmente exigem Controller.
+               */
               {...register('description')}
               className="w-full rounded-lg border border-slate-300 px-4 py-2 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
             />
