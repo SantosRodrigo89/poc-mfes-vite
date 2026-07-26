@@ -17,7 +17,23 @@ export default defineConfig({
       exposes: {
         './ProductsRoutes': './src/routes/ProductsRoutes.tsx',
       },
-      shared: ['react', 'react-dom', '@tanstack/react-query'],
+      shared: {
+        react: {
+          singleton: true,
+        },
+
+        'react-dom': {
+          singleton: true,
+        },
+
+        'react-router-dom': {
+          singleton: true,
+        },
+
+        '@tanstack/react-query': {
+          singleton: true,
+        },
+      },
       dts: false,
     }),
   ],

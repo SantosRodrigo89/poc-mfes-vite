@@ -1,7 +1,7 @@
-declare module 'products/App' {
+declare module 'products/ProductsRoutes' {
   import { ComponentType } from 'react'
 
-  const App: ComponentType
+  const ProductsRoutes: ComponentType
 
-  export default App
+  export default ProductsRoutes
 }

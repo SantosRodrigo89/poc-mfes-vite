@@ -18,7 +18,23 @@ export default defineConfig({
           // entry: 'http://localhost:4173/remoteEntry.js',
         },
       },
-      shared: ['react', 'react-dom', '@tanstack/react-query'],
+      shared: {
+        react: {
+          singleton: true,
+        },
+
+        'react-dom': {
+          singleton: true,
+        },
+
+        'react-router-dom': {
+          singleton: true,
+        },
+
+        '@tanstack/react-query': {
+          singleton: true,
+        },
+      },
     }),
   ],
 })
